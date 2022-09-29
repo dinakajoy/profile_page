@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  header.header 
+    h1= title
+  div.form-wrapper
+    form
+      input(type="hidden", id="id", value=(data._id ? data._id : null))
+      div.form-element
+        label(for="name") Name:
+        input(type="text", id="name", required="true" value=(data.name ? data.name : "Test name"))
+      div.form-element
+        label(for="email") Email:
+        input(type="email", id="email", required="true" value=(data.email ? data.email : "test@mail.com"))
+      div.form-element
+        label(for="phone") Phone Number:
+        input(type="tel", id="phone", required="true" value=(data.phone ? data.phone : "1234567"))
+      div.form-element
+        label(for="country") Country:
+        input(type="text", id="country", required="true" value=(data.country ? data.country : "Test country"))
+      div.form-btns
+        div.form-element
+          button(id="cancel", type="reset").cancel-btn 
+            a(href="/") Cancel
+        div.form-element
+          button(id="submit", type="submit").submit-btn Submit
+  script(type="text/javascript").
+    const profileForm = document.querySelector('#submit')
+    const handleFormData = (e) => {
+      e.preventDefault();
+      const data = {
+        id: document.getElementById('id').value,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        country: document.getElementById('country').value
+      };
+      
+      fetch('/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if(data.status === 'success')
+          window.location.href = '/';
+        else
+          (Array.isArray(data.payload)) ? alert(`${data.payload[0].param} throws ${data.payload[0].msg} error`) : alert(data.payload)
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+      })
+    }
+
+    profileForm.addEventListener('click', handleFormData)

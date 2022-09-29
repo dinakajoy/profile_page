@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  header.header 
+    h1= title
+  div.form-wrapper
+    div.form-element
+      label(for="name") Name
+      if value=data.name
+        input(type="text", id="name", value=data.name, disabled)
+      else
+        input(type="text", id="name", value="Test name", disabled)
+    div.form-element
+      label(for="email") Email
+      if value=data.email
+        input(type="text", id="email", value=data.email, disabled)
+      else
+        input(type="email", id="email", value="test@mail.com", disabled)
+    div.form-element
+      label(for="phone") Phone Number
+      if value=data.email
+        input(type="tel", id="phone", value=data.phone, disabled)
+      else
+        input(type="tel", id="phone", value="1234567", disabled)
+    div.form-element
+      label(for="country") Country
+      if value=data.email
+        input(type="text", id="country", value=data.country, disabled)
+      else
+        input(type="text", id="country", value="Test country", disabled)
+    div.form-element
+      button(id="edit") 
+        if value=data.email
+          a(href=`/profile/${data.email}`) Edit
+        else
+          a(href="/profile/test@mail.com") Edit
+        

@@ -1,7 +1,7 @@
 # User Profile
 
 ## Description
-A simple full-stack user profile application that allows users to update their profile. Built using TypeScript, Pug, .js and MongoDB. This project was built to learn how to spin and connect applications to Docker containers.
+A simple full-stack user profile application that allows users to update their profile. Built using TypeScript, Pug and MongoDB. This project was built to learn how to spin and connect applications to Docker containers.
 
 ## Installation for development purpose
 - Clone the repository and cd into the project directory
